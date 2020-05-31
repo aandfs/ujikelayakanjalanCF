@@ -1,5 +1,0 @@
-body {
-  background-image: url("paper.gif");
-}
-
-   background-repeat: repeat-x;
