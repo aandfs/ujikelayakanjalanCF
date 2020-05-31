@@ -1,35 +1,35 @@
 <?php
 require_once "koneksi/init.php";
-include'header.php';
+include 'header.php';
 require_once 'koneksi/session.php';
-$errors =0;
-$error ='';
-if(isset($_POST['submit'])){
-  $passlama     = $_POST['passlama'];
-  $passbaru       = $_POST['passbaru'];
-  $passkonfirmasi   = $_POST['passkonfirmasi'];
+$errors = 0;
+$error = '';
+if (isset($_POST['submit'])) {
+  $passlama     = htmlspecialchars($_POST['passlama']);
+  $passbaru       = htmlspecialchars($_POST['passbaru']);
+  $passkonfirmasi   = htmlspecialchars($_POST['passkonfirmasi']);
 
   $tampil_pass = tampilkan_password();
   $row = mysqli_fetch_array($tampil_pass);
-  if(!empty(trim($passlama)) && !empty(trim($passbaru)) && !empty(trim($passkonfirmasi))){
-    if($row['pass']  == $passlama){
-      if($passbaru == $passkonfirmasi){
-        if(edit_password($passbaru)){
-          $errors=2;
-        }else{
-            $errors =1;
-            $error = 'Ada Masalah Saat Ganti Password';
+  if (!empty(trim($passlama)) && !empty(trim($passbaru)) && !empty(trim($passkonfirmasi))) {
+    if ($row['pass']  == $passlama) {
+      if ($passbaru == $passkonfirmasi) {
+        if (edit_password($passbaru)) {
+          $errors = 2;
+        } else {
+          $errors = 1;
+          $error = 'Ada Masalah Saat Ganti Password';
         }
-      }else{
-        $errors =1;
+      } else {
+        $errors = 1;
         $error = 'Password Baru dan Konfirmasi Password Berbeda';
       }
-    }else{
-      $errors =1;
+    } else {
+      $errors = 1;
       $error = 'Password Lama Salah';
     }
-  }else{
-    $errors =1;
+  } else {
+    $errors = 1;
     $error = 'Password Lama, Password Baru, dan Konfirmasi Password Harus Diisi';
   }
 }
@@ -37,6 +37,7 @@ if(isset($_POST['submit'])){
 
 
 ?>
+
 <body>
 
   <div class="size">
@@ -59,26 +60,26 @@ if(isset($_POST['submit'])){
     <br>
 
     <!-- alert post -->
-    <?php if($errors == 1): ?>
-    <div class="alert alert-danger" role="alert" id="sizealert">
+    <?php if ($errors == 1) : ?>
+      <div class="alert alert-danger" role="alert" id="sizealert">
         <?php echo $error ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <?php endif; ?>
 
-    <?php if($errors == 2): ?>
-    <div class="alert alert-success" role="alert" id="sizealert">
+    <?php if ($errors == 2) : ?>
+      <div class="alert alert-success" role="alert" id="sizealert">
         Update Password Berhasil
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <?php endif; ?>
   </div>
 
   <?php
-   include'footer.php';
-   ?>
+  include 'footer.php';
+  ?>
 </body>

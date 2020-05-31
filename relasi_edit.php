@@ -3,10 +3,10 @@
 require_once "koneksi/init.php";
 
 	if(isset($_POST['submit'])){
-		$kdrelasi   = $_POST['kdrelasi'];
-    $kdkerusakan     = $_POST['kdkerusakan'];
-    $kdpenyebab      = $_POST['kdpenyebab'];
-		$mb             = $_POST['mb'];
+		$kdrelasi   = htmlspecialchars($_POST['kdrelasi']);
+    $kdkerusakan     = htmlspecialchars($_POST['kdkerusakan']);
+    $kdpenyebab      = htmlspecialchars($_POST['kdpenyebab']);
+		$mb             = htmlspecialchars($_POST['mb']);
 
 	  if(!empty(trim($kdrelasi)) && !empty(trim($mb))){
 
@@ -21,7 +21,3 @@ require_once "koneksi/init.php";
 			header('Location: relasi.php?error=1');
 	  }
 	}
-
-
-
- ?>

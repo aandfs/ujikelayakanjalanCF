@@ -3,8 +3,8 @@
 require_once "koneksi/init.php";
 
 	if(isset($_POST['submit'])){
-		$kdklkerusakan  = $_POST['kdklkerusakan'];
-	  $namaklkerusakan = $_POST['namaklkerusakan'];
+		$kdklkerusakan  = htmlspecialchars($_POST['kdklkerusakan']);
+	  $namaklkerusakan = htmlspecialchars($_POST['namaklkerusakan']);
 
 
 	  if(!empty(trim($kdklkerusakan)) && !empty(trim($namaklkerusakan))){
@@ -20,7 +20,3 @@ require_once "koneksi/init.php";
 			header('Location: klkerusakan.php?error=1');
 	  }
 	}
-
-
-
- ?>

@@ -3,8 +3,8 @@
 require_once "koneksi/init.php";
 
 	if(isset($_POST['submit'])){
-    $kdpenyebab    = $_POST['kdpenyebab'];
-    $penyebab     = $_POST['penyebab'];
+    $kdpenyebab    = htmlspecialchars($_POST['kdpenyebab']);
+    $penyebab     = htmlspecialchars($_POST['penyebab']);
 
 	  if(!empty(trim($kdpenyebab)) && !empty(trim($penyebab))){
 
@@ -19,7 +19,3 @@ require_once "koneksi/init.php";
 			header('Location: penyebab.php?error=1');
 	  }
 	}
-
-
-
- ?>
